@@ -1,0 +1,80 @@
+# (MariaDB) client library
+[client]
+default-character-set           = utf8mb4
+
+# MySQL client binary
+[mysql]
+default-character-set           = utf8mb4
+
+# MySQL server / MariaDB
+[mysqld]
+user                            = mysql
+pid-file                        = /run/mysqld/mysqld.pid
+socket                          = /run/mysqld/mysqld.sock
+port                            = 3306
+basedir                         = /usr
+datadir                         = /srv/mysql
+tmpdir                          = /tmp
+lc-messages-dir                 = /usr/share/mysql
+connect_timeout                 = 10
+
+# bind on all interfaces
+bind-address                    = *
+
+# disable TLS
+skip-ssl
+
+# don't reverse lookup hostnames
+skip-host-cache
+symbolic-links                  = OFF
+
+skip_name_resolve               = ON
+
+# connection settings
+bind-address                    = 0.0.0.0
+connect_timeout                 = 10
+max_allowed_packet              = 32M
+wait_timeout                    = 3600
+skip_ssl                        = ON
+
+# sql behaviour
+default-storage-engine          = INNODB
+explicit_defaults_for_timestamp = ON
+sql_mode                        = "NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES"
+sysdate-is-now                  = ON
+
+# character / timezone
+character_set_server            = utf8mb4
+collation_server                = utf8mb4_unicode_ci
+default-time-zone               = "+00:00"
+
+# query cache
+query_cache_size                = 0
+query_cache_type                = OFF
+
+# logging
+log_warnings                    = 3
+
+# innodb configuration
+innodb_buffer_pool_size         = 512M
+innodb_flush_log_at_trx_commit  = 1
+
+# myisam configuration
+delay_key_write                 = OFF
+key_buffer_size                 = 32M
+myisam_recover_options          = BACKUP
+
+# temporary tables
+tmp_table_size                  = 256M
+max_heap_table_size             = 256M
+
+## Testcontainer specific
+
+# disable dumping of buffer pool
+innodb_buffer_pool_dump_at_shutdown = OFF
+innodb_buffer_pool_load_at_startup  = OFF
+
+# disable double write buffer
+innodb_doublewrite                  = OFF
+
+
